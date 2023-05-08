@@ -1,0 +1,256 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AvaloniaCalculator.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
+        x:Class="AvaloniaCalculator.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Calculator"
+        Background="#e3e3e3"
+		Height="450"
+		Width="300"
+		>
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <DockPanel>
+        <ComboBox DockPanel.Dock="Top" SelectedIndex="{Binding SelIndex, Mode=TwoWay}" HorizontalAlignment="Stretch">
+            <ComboBoxItem>Standart</ComboBoxItem>
+            <ComboBoxItem>Engineering</ComboBoxItem>
+        </ComboBox>
+
+        <Canvas x:Name="canva">
+            <DockPanel Background="#e3e3e3" IsVisible="{Binding Handle}" Width="{Binding ElementName=canva, Path=Bounds.Width}" Height="{Binding ElementName=canva, Path=Bounds.Height}">
+                <TextBlock Text="{Binding Calc.Expression}" Margin="10,10,10,0" FontSize="20" FontWeight="500" HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Top"/>
+                <TextBlock Text="{Binding Calc.Entry}" Margin="10,0,10,0" FontSize="50" FontWeight="500" HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Top"/>
+                <Grid DockPanel.Dock="Top" Margin="4,10,4,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <DockPanel Grid.Column="0" Grid.Row="0">
+                        <Button HotKey="Shift+D5" Content="%" Command="{Binding Calc.percentFunc}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="0" Grid.Row="1">
+                        <Button x:Name="buttoninverse" Content="1/x" Command="{Binding Calc.specFunc}" CommandParameter="{Binding ElementName=buttoninverse, Path=Content}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="0" Grid.Row="2">
+                        <Button HotKey="D7" x:Name="button7" Content="7" Command="{Binding Calc.addNumber}" CommandParameter="{Binding ElementName=button7, Path=Content}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="0" Grid.Row="3">
+                        <Button HotKey="D4" x:Name="button4" Content="4" Command="{Binding Calc.addNumber}" CommandParameter="{Binding ElementName=button4, Path=Content}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="0" Grid.Row="4">
+                        <Button HotKey="D1" x:Name="button1" Content="1" Command="{Binding Calc.addNumber}" CommandParameter="{Binding ElementName=button1, Path=Content}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="0" Grid.Row="5">
+                        <Button x:Name="buttonnegate" Content="+/-" Command="{Binding Calc.specFunc}" CommandParameter="{Binding ElementName=buttonnegate, Path=Content}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="1" Grid.Row="0">
+                        <Button HotKey="Delete" Content="CE" Command="{Binding Calc.clearEntry}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="1" Grid.Row="1">
+                        <Button x:Name="buttonsqr" Content="^2" Command="{Binding Calc.specFunc}" CommandParameter="{Binding ElementName=buttonsqr, Path=Content}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="1" Grid.Row="2">
+                        <Button HotKey="D8" x:Name="button8" Content="8" Command="{Binding Calc.addNumber}" CommandParameter="{Binding ElementName=button8, Path=Content}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="1" Grid.Row="3">
+                        <Button HotKey="D5" x:Name="button5" Content="5" Command="{Binding Calc.addNumber}" CommandParameter="{Binding ElementName=button5, Path=Content}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="1" Grid.Row="4">
+                        <Button HotKey="D2" x:Name="button2" Content="2" Command="{Binding Calc.addNumber}" CommandParameter="{Binding ElementName=button2, Path=Content}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="1" Grid.Row="5">
+                        <Button HotKey="D0" x:Name="button0" Content="0" Command="{Binding Calc.addNumber}" CommandParameter="{Binding ElementName=button0, Path=Content}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="2" Grid.Row="0">
+                        <Button Content="C" Command="{Binding Calc.clearExpression}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="2" Grid.Row="1">
+                        <Button x:Name="buttonsqrt" Content="sqrt" Command="{Binding Calc.specFunc}" CommandParameter="{Binding ElementName=buttonsqrt, Path=Content}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="2" Grid.Row="2">
+                        <Button HotKey="D9" x:Name="button9" Content="9" Command="{Binding Calc.addNumber}" CommandParameter="{Binding ElementName=button9, Path=Content}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="2" Grid.Row="3">
+                        <Button HotKey="D6" x:Name="button6" Content="6" Command="{Binding Calc.addNumber}" CommandParameter="{Binding ElementName=button6, Path=Content}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="2" Grid.Row="4">
+                        <Button HotKey="D3" x:Name="button3" Content="3" Command="{Binding Calc.addNumber}" CommandParameter="{Binding ElementName=button3, Path=Content}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="2" Grid.Row="5">
+                        <Button HotKey="," Content="," Command="{Binding Calc.addComma}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="3" Grid.Row="0">
+                        <Button HotKey="Back" Content="Back" Command="{Binding Calc.backSpace}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="3" Grid.Row="1">
+                        <Button HotKey="OemQuestion" x:Name="buttonDiv" Content="/" Command="{Binding Calc.addAction}" CommandParameter="{Binding ElementName=buttonDiv, Path=Content}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="3" Grid.Row="2">
+                        <Button HotKey="Shift+D8" x:Name="buttonMul" Content="*" Command="{Binding Calc.addAction}" CommandParameter="{Binding ElementName=buttonMul, Path=Content}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="3" Grid.Row="3">
+                        <Button HotKey="-" x:Name="buttonSub" Content="-" Command="{Binding Calc.addAction}" CommandParameter="{Binding ElementName=buttonSub, Path=Content}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="3" Grid.Row="4">
+                        <Button HotKey="Shift++" x:Name="buttonAdd" Content="+" Command="{Binding Calc.addAction}" CommandParameter="{Binding ElementName=buttonAdd, Path=Content}" Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="3" Grid.Row="5" VerticalAlignment="Stretch">
+                        <Button HotKey="Enter" Content="=" Command="{Binding Calc.Equal}" Margin="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" Background="#0073ff"></Button>
+                    </DockPanel>
+                </Grid>
+            </DockPanel>
+
+            <DockPanel Background="#e3e3e3" IsVisible="{Binding !Handle}" Width="{Binding ElementName=canva, Path=Bounds.Width}" Height="{Binding ElementName=canva, Path=Bounds.Height}">
+                <TextBlock Text="COMING SOON" Margin="10,10,10,0" FontSize="20" FontWeight="500" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top"/>
+                <TextBlock Text=" " Margin="10,10,10,0" FontSize="20" FontWeight="500" HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Top"/>
+                <TextBlock Text="0" Margin="10,0,10,0" FontSize="50" FontWeight="500" HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Top"/>
+                <Grid DockPanel.Dock="Top" Margin="4,10,4,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <DockPanel Grid.Column="0" Grid.Row="0">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">2nd</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="0" Grid.Row="1">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">x^2</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="0" Grid.Row="2">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">sqrt</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="0" Grid.Row="3">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">x^y</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="0" Grid.Row="4">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">10^x</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="0" Grid.Row="5">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">log</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="0" Grid.Row="6">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">ln</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="1" Grid.Row="0">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">pi</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="1" Grid.Row="1">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">1/x</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="1" Grid.Row="2">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">(</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="1" Grid.Row="3">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">7</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="1" Grid.Row="4">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">4</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="1" Grid.Row="5">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">1</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="1" Grid.Row="6">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">+/-</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="2" Grid.Row="0">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">e</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="2" Grid.Row="1">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">|x|</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="2" Grid.Row="2">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">)</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="2" Grid.Row="3">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">8</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="2" Grid.Row="4">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">5</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="2" Grid.Row="5">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">2</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="2" Grid.Row="6">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">0</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="3" Grid.Row="0">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">CE</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="3" Grid.Row="1">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">exp</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="3" Grid.Row="2">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">n!</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="3" Grid.Row="3">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">9</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="3" Grid.Row="4">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">6</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="3" Grid.Row="5">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">3</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="3" Grid.Row="6">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">,</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="4" Grid.Row="0">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Back</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="4" Grid.Row="1">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">mod</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="4" Grid.Row="2">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">/</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="4" Grid.Row="3">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">*</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="4" Grid.Row="4">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">-</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="4" Grid.Row="5">
+                        <Button Margin="1" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">+</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Column="4" Grid.Row="6" VerticalAlignment="Stretch">
+                        <Button Margin="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" Background="#0073ff">=</Button>
+                    </DockPanel>
+                    
+                </Grid>
+            </DockPanel>
+        </Canvas>
+    </DockPanel>
+    
+</Window>
